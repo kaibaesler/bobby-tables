@@ -1,0 +1,11 @@
+h1. Chicken Scheme
+
+"CHICKEN":http://www.call-with-current-continuation.org/ is a compiler for the "Scheme":http://schemers.org/ programming language that supports almost all of the "R5RS":http://schemers.org/Documents/Standards/R5RS/HTML/ Scheme language standard. Database access is available through extension modules called "eggs":http://chicken.wiki.br/chicken-projects/egg-index-4.html, for example the "sqlite3":http://chicken.wiki.br/eggref/4/sqlite3 egg, which is a straightforward binding to version 3.x of the SQLite API.
+
+
+<pre style="code">
+(define DB (sqlite3:open  "myexample.db"))
+(sqlite3:exec DB "INSERT INTO Person(name) VALUES(?)" "Luke Skywalker")
+(sqlite3:for-each-row print DB "SELECT id,name FROM Person WHERE id=?" 3)
+(define adults (sqlite3:map-row DB "SELECT name FROM Person WHERE age >= ?" 18)
+</pre>
